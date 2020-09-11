@@ -2,7 +2,7 @@ const Projects = require('../models/projects');
 const { errorResponse } = require('../helpers');
     
 const getProjects = async (req, resp) => {
-    const total = await Projects.countDocuments().exec();
+    const total = await Projects.countDocuments().exec().catch(() => null);
     if (!total) return errorResponse(resp, 400, 'No projects available');
     const selectors = {};
     const returnFields = 'name state autor createdAt updatedAt';

@@ -4,7 +4,7 @@ const { regexPassword, errorPassword } = require('../constants');
 const { errorResponse } = require('../helpers');
     
 const getUsers = async (req, resp) => {
-    const total = await Users.countDocuments().exec();
+    const total = await Users.countDocuments().exec().catch(() => null);;
     if (!total) return errorResponse(resp, 400, 'No users available');
     const selectors = {};
     const returnFields = 'name email role state createdAt updatedAt';
